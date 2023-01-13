@@ -42,7 +42,7 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-This is a traditional store application made for ordering beers. The application uses external api to load the load a list of beers. User's cart and order history is saved to local storage, so every time application starts all the data is retained.
+This is a traditional store application made for ordering beers. The application uses external api to load a list of beers. User's cart and order history is saved to local storage, so every time application starts all the data is retained.
 
 ### Built With
 
