@@ -23,7 +23,7 @@ const BeerList = () => {
 
   return (
     <Container className="d-flex flex-column text-center align-items=center justify-content-center">
-      <h1>Beer List</h1>
+      <h1>Beers</h1>
       {isLoading ? (
         <LoadingSpinner />
       ) : isError ? (

@@ -12,7 +12,7 @@ const HistoryExcerpt = ({ order }) => {
         </div>
       </Accordion.Header>
       <Accordion.Body>
-        <Table>
+        <Table responsive className="overflow-auto">
           <thead>
             <tr>
               <th>#</th>
@@ -24,7 +24,7 @@ const HistoryExcerpt = ({ order }) => {
           </thead>
           <tbody>
             {order.cart.map((beer, i) => (
-              <tr>
+              <tr key={i}>
                 <td>{i + 1}</td>
                 <td>{beer.name}</td>
                 <td>{beer.brand}</td>

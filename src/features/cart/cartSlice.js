@@ -41,6 +41,17 @@ const useCartSlice = createSlice({
         state.totalCount--;
       }
     },
+    removeAllItemCart: (state, action) => {
+      const itemId = action.payload.id;
+      let cartItem = state.entities[itemId];
+
+      if (cartItem) {
+        const itemQty = cartItem.quantity;
+        cartAdapter.removeOne(state, itemId);
+
+        state.totalCount -= itemQty;
+      }
+    },
     emtpyCart: (state, action) => {
       cartAdapter.removeAll(state);
       state.totalCount = 0;
@@ -55,16 +66,19 @@ export const {
 } = cartAdapter.getSelectors((state) => state.cart);
 
 export const selectTotalCartQuantity = (state) => state.cart.totalCount;
-export const selectItemCartQuantity = (state, itemId) => {
+
+export const selectItemCartQuantity = (state, itemUid) => {
   const items = state.cart.entities;
 
-  for (let i = 0; i < items.length; i++) {
-    if (items[i] === itemId) {
-      return items[i].quantity;
+  // console.log(itemUid, items, state.cart.entities);
+  for (let key in items) {
+    if (items[key].uid === itemUid) {
+      return items[key].quantity;
     }
   }
 };
 
-export const { addItemCart, removeItemCart, emtpyCart } = useCartSlice.actions;
+export const { addItemCart, removeItemCart, removeAllItemCart, emtpyCart } =
+  useCartSlice.actions;
 
 export default useCartSlice.reducer;
