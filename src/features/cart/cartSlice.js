@@ -55,6 +55,15 @@ export const {
 } = cartAdapter.getSelectors((state) => state.cart);
 
 export const selectTotalCartQuantity = (state) => state.cart.totalCount;
+export const selectItemCartQuantity = (state, itemId) => {
+  const items = state.cart.entities;
+
+  for (let i = 0; i < items.length; i++) {
+    if (items[i] === itemId) {
+      return items[i].quantity;
+    }
+  }
+};
 
 export const { addItemCart, removeItemCart, emtpyCart } = useCartSlice.actions;
 

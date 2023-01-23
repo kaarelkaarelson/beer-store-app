@@ -6,7 +6,6 @@ import {
   removeItemCart,
   selectCartItemById,
 } from '../features/cart/cartSlice';
-import store from '../app/store';
 
 const ShoppingCartItem = ({ beer }) => {
   const dispatch = useDispatch();
@@ -27,7 +26,7 @@ const ShoppingCartItem = ({ beer }) => {
       <Button variant="outline-danger" onClick={onRemoveItemCart}>
         &times;
       </Button>
-      <Button onClick={() => console.log(store.state)}>State</Button>
+      {/* <Button onClick={() => console.log(store.state)}>State</Button> */}
     </Stack>
   );
 };

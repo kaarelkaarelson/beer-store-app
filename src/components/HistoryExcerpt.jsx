@@ -1,10 +1,16 @@
+import { format } from 'date-fns';
 import React from 'react';
 import { Accordion, Table } from 'react-bootstrap';
 
 const HistoryExcerpt = ({ order }) => {
   return (
     <Accordion.Item eventKey={order.id}>
-      <Accordion.Header>{order.id}</Accordion.Header>
+      <Accordion.Header>
+        <div className="d-flex justify-content-between text-center">
+          <span className="text-muted me-5">{order.date}</span>
+          <span>{order.id}</span>
+        </div>
+      </Accordion.Header>
       <Accordion.Body>
         <Table>
           <thead>
