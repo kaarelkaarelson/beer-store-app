@@ -20,6 +20,7 @@ const useOrdersSlice = createSlice({
       const newOrder = {
         cart,
         id: uuid(),
+        // TODO: Refactor to universal date object for comparing dates.
         date: format(new Date(), 'MM/dd/yyyy'),
       };
 

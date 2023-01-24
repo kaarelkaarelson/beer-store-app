@@ -3,6 +3,8 @@ $custom-colors: (
   'primary': #6b0504,
 );
 
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
 /* Extending Bootstrap spacers */
 $custom-spacers: (
   6: $spacer * 3.5,
@@ -12,5 +14,29 @@ $custom-spacers: (
   10: $spacer * 7,
 );
 
-$theme-colors: map-merge($theme-colors, $custom-colors);
 $spacers: map-merge($spacers, $custom-spacers);
+
+/* Extending breakpoint Bootstrap classes */
+$utilities: map-merge(
+  $utilities,
+  (
+    'width':
+      map-merge(
+        map-get($utilities, 'width'),
+        (
+          responsive: true,
+          values: (
+            10: 10%,
+            25: 25%,
+            33: 33%,
+            50: 50%,
+            66: 66%,
+            75: 75%,
+            90: 90%,
+            100: 100%,
+            auto: auto,
+          ),
+        )
+      ),
+  )
+);
