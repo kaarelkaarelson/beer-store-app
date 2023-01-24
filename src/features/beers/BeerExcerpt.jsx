@@ -6,7 +6,7 @@ import {
   addItemCart,
   removeItemCart,
   selectItemCartQuantity,
-} from '../features/cart/cartSlice';
+} from '../cart/cartSlice';
 
 const BeerExcerpt = ({ beer }) => {
   const dispatch = useDispatch();

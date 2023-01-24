@@ -1,9 +1,9 @@
 import React from 'react';
 import { Stack, Offcanvas, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useShoppingCart } from '../hooks/useShoppingCart';
-import { emtpyCart, selectAllCartItems } from '../features/cart/cartSlice';
-import { addCartOrders } from '../features/orders/ordersSlice';
+import { useShoppingCart } from './useShoppingCart';
+import { emtpyCart, selectAllCartItems } from './cartSlice';
+import { addCartOrders } from '../orders/ordersSlice';
 import ShoppingCartItem from './ShoppingCartItem';
 
 const ShoppingCart = ({ isOpen }) => {

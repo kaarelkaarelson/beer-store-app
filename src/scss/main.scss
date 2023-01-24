@@ -4,7 +4,11 @@
 // Import Bootstrap functions, vars and mixins
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/maps';
 @import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities';
+// @import "~bootstrap/scss/helpers";
+// @import "~bootstrap/scss/utilities/api";
 
 // Import our map amends
 // Go here to run any Sass map amends on Bootstrap Sass maps
@@ -17,7 +21,7 @@
 // Bootstrap main import
 @import '~bootstrap/scss/bootstrap';
 
-// Debugging Bootstrap variables
+/* FOR DEBUGGING BOOTSTRAP VARIABLES */
 // :root {
 //   @each $spacer, $value in $spacers {
 //     --theme-spacer-#{$spacer}: #{$value};

@@ -8,4 +8,4 @@ const LoadingSpinner = () => (
   </div>
 );
 
-export { LoadingSpinner };
+export default LoadingSpinner;

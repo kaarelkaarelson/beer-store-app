@@ -6,7 +6,7 @@ import {
   removeItemCart,
   removeAllItemCart,
   selectCartItemById,
-} from '../features/cart/cartSlice';
+} from './cartSlice';
 
 const ShoppingCartItem = ({ beer }) => {
   const dispatch = useDispatch();

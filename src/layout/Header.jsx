@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Container, Button, Nav, Navbar } from 'react-bootstrap';
-import { useShoppingCart } from '../hooks/useShoppingCart';
+import { useShoppingCart } from '../features/cart/useShoppingCart';
 import { selectTotalCartQuantity } from '../features/cart/cartSlice';
 
 const Header = () => {
@@ -55,4 +55,4 @@ const Header = () => {
   );
 };
 
-export { Header };
+export default Header;
