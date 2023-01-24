@@ -1,11 +1,24 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Card, Button, ListGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemCart, removeItemCart } from '../features/cart/cartSlice';
+import {
+  addItemCart,
+  removeItemCart,
+  selectItemCartQuantity,
+} from '../features/cart/cartSlice';
 
 const BeerExcerpt = ({ beer }) => {
   const dispatch = useDispatch();
-  const quantity = useSelector((state) => state.cart.id === beer.id);
+  // const quantity = useSelector((state) => state.cart.id === beer.id);
+  const quantity = useSelector((state) =>
+    selectItemCartQuantity(state, beer.uid)
+  );
+
+  useEffect(() => {
+    console.log(quantity);
+    console.log(beer.id);
+  }, [quantity]);
 
   const onAddItemCart = () => dispatch(addItemCart(beer));
   const onRemoveItemCart = () => dispatch(removeItemCart({ id: beer.id }));
@@ -13,8 +26,8 @@ const BeerExcerpt = ({ beer }) => {
   return (
     <Card className="w-100">
       <Card.Body className="d-flex flex-column children-space-between-1">
-        <Card.Title className="">{beer.name}</Card.Title>
-        <Card.Subtitle>{beer.brand}</Card.Subtitle>
+        <Card.Title>{beer.name}</Card.Title>
+        <Card.Subtitle className="text-muted">{beer.brand}</Card.Subtitle>
         <ListGroup variant="flush">
           <ListGroup.Item>{beer.style}</ListGroup.Item>
           <ListGroup.Item>{beer.hop}</ListGroup.Item>
@@ -26,13 +39,21 @@ const BeerExcerpt = ({ beer }) => {
         </ListGroup>
       </Card.Body>
       <Card.Footer className="mt-auto">
-        <Button onClick={onAddItemCart} className="w-100">
-          Add To Cart
-        </Button>
-        <Button onClick={onRemoveItemCart} className="w-100 bg-danger">
-          -
-        </Button>
-        <span>{quantity}</span>
+        {quantity > 0 ? (
+          <div className="d-flex flex-row justify-content-center">
+            <Button onClick={onRemoveItemCart} className="w-30 bg-danger">
+              -
+            </Button>
+            <span className="px-3">x{quantity}</span>
+            <Button onClick={onAddItemCart} className="w-30 bg-success">
+              +
+            </Button>
+          </div>
+        ) : (
+          <Button onClick={onAddItemCart} className="w-100">
+            Add To Cart
+          </Button>
+        )}
       </Card.Footer>
     </Card>
   );

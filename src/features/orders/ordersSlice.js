@@ -1,7 +1,9 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { format } from 'date-fns';
 import { v4 as uuid } from 'uuid';
 
 const ordersAdapter = createEntityAdapter({
+  selectId: (order) => order.id,
   sortComparer: (a, b) => b.date.localeCompare(a.date),
 });
 
@@ -15,7 +17,11 @@ const useOrdersSlice = createSlice({
   reducers: {
     addCartOrders: (state, action) => {
       const cart = action.payload;
-      const newOrder = { cart, id: uuid(), date: Date() };
+      const newOrder = {
+        cart,
+        id: uuid(),
+        date: format(new Date(), 'MM/dd/yyyy'),
+      };
 
       console.log(newOrder);
       ordersAdapter.upsertOne(state, newOrder);

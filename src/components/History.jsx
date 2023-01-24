@@ -5,13 +5,12 @@ import { selectAllOrders } from '../features/orders/ordersSlice';
 import HistoryExcerpt from './HistoryExcerpt';
 
 const History = () => {
-  const dispatch = useDispatch();
   const orders = useSelector(selectAllOrders);
 
   return (
     <Container className="d-flex flex-column text-center">
       <h1>History</h1>
-      <Accordion>
+      <Accordion className='pt-5'>
         {orders.map((order, i) => (
           <HistoryExcerpt key={i} order={order} />
         ))}

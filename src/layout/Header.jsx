@@ -7,7 +7,6 @@ import { selectTotalCartQuantity } from '../features/cart/cartSlice';
 
 const Header = () => {
   const { openCart } = useShoppingCart();
-
   const totalCartQuantity = useSelector(selectTotalCartQuantity);
 
   return (

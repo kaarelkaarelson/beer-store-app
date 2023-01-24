@@ -7,7 +7,7 @@ function Layout() {
   return (
     <div>
       <Header />
-      <main className="mt-8 mx-5">
+      <main className="my-8 mx-3 mx-md-5">
         <Outlet />
       </main>
     </div>
