@@ -67,6 +67,7 @@ For this you need npm and node. You can check if you have them installed by runn
   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Installation
 
 <!-- 1. Get a free API Key at [https://example.com](https://example.com) -->
