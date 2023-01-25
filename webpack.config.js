@@ -22,7 +22,6 @@ module.exports = {
   optimization: {
     emitOnErrors: true,
   },
-  devtool: 'source-map',
   experiments: {
     topLevelAwait: true,
   },
