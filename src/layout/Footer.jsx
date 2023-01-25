@@ -15,16 +15,6 @@ const Footer = () => {
             </a>
             <span className="text-muted">© 2021 Kaarel-Richard Kaarelson</span>
           </Col>
-          {/* <Col
-            md
-            xs={6}
-            className="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <Nav className="justify-content-end list-unstyled d-flex">
-              <Nav.Link>
-                <img src={beerLogo} width="50"></img>
-              </Nav.Link>
-            </Nav>
-          </Col> */}
         </Row>
       </Container>
     </footer>

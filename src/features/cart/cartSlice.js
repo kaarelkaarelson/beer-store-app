@@ -71,7 +71,6 @@ export const selectTotalCartQuantity = (state) => state.cart.totalCount;
 export const selectItemCartQuantity = (state, itemUid) => {
   const items = state.cart.entities;
 
-  // console.log(itemUid, items, state.cart.entities);
   for (let key in items) {
     if (items[key].uid === itemUid) {
       return items[key].quantity;
@@ -87,8 +86,6 @@ export const selectCartGroups = (state) => {
     (a, b) => parseFloat(a.alcohol) - parseFloat(b.alcohol)
   );
 
-  console.log('itemsArr', sortedArr);
-
   if (sortedArr) {
     const groups = sortedArr.reduce((accumulator, item) => {
       let style = item.style;
@@ -102,8 +99,6 @@ export const selectCartGroups = (state) => {
 
       return accumulator;
     }, {});
-
-    console.log(items, groups);
 
     return groups;
   }

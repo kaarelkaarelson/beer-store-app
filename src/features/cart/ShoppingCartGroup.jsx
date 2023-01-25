@@ -1,15 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import { useRef } from 'react';
 import { useEffect } from 'react';
-import { Button, Card, Stack } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  addItemCart,
-  removeItemCart,
-  removeAllItemCart,
-  selectCartItemById,
-} from './cartSlice';
+import { Button, Stack } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { addItemCart, removeItemCart } from './cartSlice';
 import ShoppingCartGroupItem from './ShoppingCartGroupItem';
 
 const ShoppingCartGroup = ({ group }) => {

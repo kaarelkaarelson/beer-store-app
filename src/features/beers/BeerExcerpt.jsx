@@ -10,13 +10,11 @@ import {
 
 const BeerExcerpt = ({ beer }) => {
   const dispatch = useDispatch();
-  // const quantity = useSelector((state) => state.cart.id === beer.id);
   const quantity = useSelector((state) =>
     selectItemCartQuantity(state, beer.uid)
   );
 
-  useEffect(() => {
-  }, [quantity]);
+  useEffect(() => {}, [quantity]);
 
   const onAddItemCart = () => dispatch(addItemCart(beer));
   const onRemoveItemCart = () => dispatch(removeItemCart({ id: beer.id }));

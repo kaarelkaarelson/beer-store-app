@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Stack, Offcanvas, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useShoppingCart } from './useShoppingCart';
 import { emtpyCart, selectAllCartItems, selectCartGroups } from './cartSlice';
 import { addCartOrders } from '../orders/ordersSlice';
-import ShoppingCartGroupItem from './ShoppingCartGroupItem';
 import ShoppingCartGroup from './ShoppingCartGroup';
 
 const ShoppingCart = ({ isOpen }) => {
@@ -18,10 +17,6 @@ const ShoppingCart = ({ isOpen }) => {
     dispatch(emtpyCart());
     console.log(cartItems);
   };
-
-  useEffect(() => {
-    console.log('this', cartGroups);
-  }, [cartGroups]);
 
   return (
     <Offcanvas
@@ -37,10 +32,6 @@ const ShoppingCart = ({ isOpen }) => {
           {Object.values(cartGroups).map((group, i) => (
             <ShoppingCartGroup key={i} group={group} />
           ))}
-
-          {/* {cartItems.map((beer, i) => (
-            <ShoppingCartItem key={i} beer={beer} />
-          ))} */}
           <Button
             type="button"
             disabled={cartItems?.length === 0}

@@ -1,25 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Stack } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  addItemCart,
-  removeItemCart,
-  removeAllItemCart,
-  selectCartItemById,
-} from './cartSlice';
+import { useDispatch } from 'react-redux';
+import { addItemCart, removeItemCart, removeAllItemCart } from './cartSlice';
 
 const ShoppingCartGroupItem = ({ item }) => {
   const dispatch = useDispatch();
-  const cartItem = useSelector((state) => selectCartItemById(state, item.id));
 
   const onAddItemCart = () => dispatch(addItemCart(item));
   const onRemoveItemCart = () => dispatch(removeItemCart({ id: item.id }));
   const onRemoveAllItemCart = () =>
     dispatch(removeAllItemCart({ id: item.id }));
-
-  useEffect(() => {
-    // console.log('item', item);
-  }, []);
 
   return (
     <Stack
