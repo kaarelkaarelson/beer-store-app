@@ -1,11 +1,16 @@
+// @ts-expect-error TS(2580): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 const path = require('path');
+// @ts-expect-error TS(2580): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// @ts-expect-error TS(2580): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 const ESLintPlugin = require('eslint-webpack-plugin');
 
+// @ts-expect-error TS(2580): Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
   mode: 'development',
   entry: './src/index.js',
   output: {
+    // @ts-expect-error TS(2304): Cannot find name '__dirname'.
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
     publicPath: '/',
@@ -60,6 +65,7 @@ module.exports = {
               // `postcssOptions` is needed for postcss 8.x;
               // if you use postcss 7.x skip the key
               postcssOptions: {
+                // @ts-expect-error TS(2580): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
                 plugins: () => require('autoprefixer'),
               },
             },

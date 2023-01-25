@@ -1,7 +1,9 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
 const cartAdapter = createEntityAdapter({
+  // @ts-expect-error TS(2571): Object is of type 'unknown'.
   selectId: (beer) => beer.id,
+  // @ts-expect-error TS(2571): Object is of type 'unknown'.
   sortComparer: (a, b) => parseFloat(a.alcohol) - parseFloat(b.alcohol),
 });
 
@@ -18,6 +20,7 @@ const useCartSlice = createSlice({
       let cartItem = state.entities[itemId];
 
       if (cartItem) {
+        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         state.entities[itemId].quantity += 1;
       } else {
         let newItem = { ...action.payload, quantity: 1 };
@@ -31,9 +34,11 @@ const useCartSlice = createSlice({
       let cartItem = state.entities[itemId];
 
       if (cartItem) {
+        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         const itemQty = cartItem.quantity;
 
         if (itemQty > 1) {
+          // @ts-expect-error TS(2571): Object is of type 'unknown'.
           cartItem.quantity--;
         } else {
           cartAdapter.removeOne(state, itemId);
@@ -47,6 +52,7 @@ const useCartSlice = createSlice({
       let cartItem = state.entities[itemId];
 
       if (cartItem) {
+        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         const itemQty = cartItem.quantity;
         cartAdapter.removeOne(state, itemId);
 
@@ -64,11 +70,12 @@ export const {
   selectAll: selectAllCartItems,
   selectById: selectCartItemById,
   selectIds: selectCartItemIds,
+// @ts-expect-error TS(2571): Object is of type 'unknown'.
 } = cartAdapter.getSelectors((state) => state.cart);
 
-export const selectTotalCartQuantity = (state) => state.cart.totalCount;
+export const selectTotalCartQuantity = (state: any) => state.cart.totalCount;
 
-export const selectItemCartQuantity = (state, itemUid) => {
+export const selectItemCartQuantity = (state: any, itemUid: any) => {
   const items = state.cart.entities;
 
   // console.log(itemUid, items, state.cart.entities);
@@ -79,18 +86,19 @@ export const selectItemCartQuantity = (state, itemUid) => {
   }
 };
 
-export const selectCartGroups = (state) => {
+export const selectCartGroups = (state: any) => {
   const items = state.cart.entities;
+  // @ts-expect-error TS(2550): Property 'values' does not exist on type 'ObjectCo... Remove this comment to see the full error message
   const itemsArr = Object.values(items);
 
   const sortedArr = itemsArr.sort(
-    (a, b) => parseFloat(a.alcohol) - parseFloat(b.alcohol)
+    (a: any, b: any) => parseFloat(a.alcohol) - parseFloat(b.alcohol)
   );
 
   console.log('itemsArr', sortedArr);
 
   if (sortedArr) {
-    const groups = sortedArr.reduce((accumulator, item) => {
+    const groups = sortedArr.reduce((accumulator: any, item: any) => {
       let style = item.style;
 
       accumulator[style] = accumulator[style] || {

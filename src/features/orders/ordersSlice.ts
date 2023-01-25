@@ -1,9 +1,12 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuid } from 'uuid';
 
 const ordersAdapter = createEntityAdapter({
+  // @ts-expect-error TS(2571): Object is of type 'unknown'.
   selectId: (order) => order.id,
+  // @ts-expect-error TS(2571): Object is of type 'unknown'.
   sortComparer: (a, b) => b.date.localeCompare(a.date),
 });
 
@@ -42,10 +45,11 @@ export const {
   selectAll: selectAllOrders,
   selectById: selectOrderById,
   selectIds: selectOrderIds,
+// @ts-expect-error TS(2571): Object is of type 'unknown'.
 } = ordersAdapter.getSelectors((state) => state.orders);
 
 export const { addCartOrders, removeBeer } = useOrdersSlice.actions;
 
-export const selectTotalCartQuantity = (state) => state.orders.totalCount;
+export const selectTotalCartQuantity = (state: any) => state.orders.totalCount;
 
 export default useOrdersSlice.reducer;
