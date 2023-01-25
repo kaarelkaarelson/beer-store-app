@@ -7,9 +7,7 @@ const SearchBar = ({ search, onChange, suggestions }) => {
     setSearch(e.target.innerHTML);
   };
 
-  useEffect(() => {
-    console.log(suggestions);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="type-ahead-dropdown">

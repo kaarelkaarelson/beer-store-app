@@ -2,6 +2,7 @@ import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
 const cartAdapter = createEntityAdapter({
   selectId: (beer) => beer.id,
+  sortComparer: (a, b) => parseFloat(a.alcohol) - parseFloat(b.alcohol),
 });
 
 const initialState = cartAdapter.getInitialState({
@@ -75,6 +76,36 @@ export const selectItemCartQuantity = (state, itemUid) => {
     if (items[key].uid === itemUid) {
       return items[key].quantity;
     }
+  }
+};
+
+export const selectCartGroups = (state) => {
+  const items = state.cart.entities;
+  const itemsArr = Object.values(items);
+
+  const sortedArr = itemsArr.sort(
+    (a, b) => parseFloat(a.alcohol) - parseFloat(b.alcohol)
+  );
+
+  console.log('itemsArr', sortedArr);
+
+  if (sortedArr) {
+    const groups = sortedArr.reduce((accumulator, item) => {
+      let style = item.style;
+
+      accumulator[style] = accumulator[style] || {
+        group: style,
+        items: [],
+      };
+
+      accumulator[style].items.push(item);
+
+      return accumulator;
+    }, {});
+
+    console.log(items, groups);
+
+    return groups;
   }
 };
 

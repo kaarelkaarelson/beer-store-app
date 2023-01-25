@@ -18,9 +18,7 @@ const BeerList = () => {
     error,
   } = useGetBeersQuery();
 
-  useEffect(() => {
-    console.log(suggestions);
-  }, [suggestions]);
+  useEffect(() => {}, [suggestions]);
 
   const onSearchByChange = (e) => setSearchBy(e.target.value);
 

@@ -24,7 +24,6 @@ const useOrdersSlice = createSlice({
         date: format(new Date(), 'MM/dd/yyyy'),
       };
 
-      console.log(newOrder);
       ordersAdapter.upsertOne(state, newOrder);
     },
     removeBeer: (state, action) => {
