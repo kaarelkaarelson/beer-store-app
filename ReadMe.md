@@ -59,12 +59,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-For this you need npm and node. You can check if you have them installed by running `npm -v` and `node -v` in terminal. If you have node already, here's how to install npm.
-
-- npm
-  ```
-  npm install npm@latest -g
-  ```
+For this you need npm and node. You can check if you have them installed by running `npm -v` and `node -v` in terminal.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
