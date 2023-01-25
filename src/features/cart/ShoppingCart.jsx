@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Stack, Offcanvas, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useShoppingCart } from './useShoppingCart';
-import { emtpyCart, selectAllCartItems } from './cartSlice';
+import { emtpyCart, selectAllCartItems, selectCartGroups } from './cartSlice';
 import { addCartOrders } from '../orders/ordersSlice';
-import ShoppingCartItem from './ShoppingCartItem';
+import ShoppingCartGroupItem from './ShoppingCartGroupItem';
+import ShoppingCartGroup from './ShoppingCartGroup';
 
 const ShoppingCart = ({ isOpen }) => {
   const dispatch = useDispatch();
   const { closeCart } = useShoppingCart();
   const cartItems = useSelector(selectAllCartItems);
+  const cartGroups = useSelector((state) => selectCartGroups(state));
 
   const onConfirmPurchase = () => {
     dispatch(addCartOrders(cartItems));
     dispatch(emtpyCart());
     console.log(cartItems);
   };
+
+  useEffect(() => {
+    console.log('this', cartGroups);
+  }, [cartGroups]);
 
   return (
     <Offcanvas
@@ -28,9 +34,13 @@ const ShoppingCart = ({ isOpen }) => {
       </Offcanvas.Header>
       <Offcanvas.Body>
         <Stack gap={3}>
-          {cartItems.map((beer, i) => (
-            <ShoppingCartItem key={i} beer={beer} />
+          {Object.values(cartGroups).map((group, i) => (
+            <ShoppingCartGroup key={i} group={group} />
           ))}
+
+          {/* {cartItems.map((beer, i) => (
+            <ShoppingCartItem key={i} beer={beer} />
+          ))} */}
           <Button
             type="button"
             disabled={cartItems?.length === 0}

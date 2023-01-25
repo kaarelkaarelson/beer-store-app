@@ -16,8 +16,6 @@ const BeerExcerpt = ({ beer }) => {
   );
 
   useEffect(() => {
-    console.log(quantity);
-    console.log(beer.id);
   }, [quantity]);
 
   const onAddItemCart = () => dispatch(addItemCart(beer));
