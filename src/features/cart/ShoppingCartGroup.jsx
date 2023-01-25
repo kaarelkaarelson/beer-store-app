@@ -22,9 +22,12 @@ const ShoppingCartGroup = ({ group }) => {
   const onAddItemCart = () => dispatch(addItemCart({ id: lowestItemId }));
 
   return (
-    <Stack direction="vertical" gap={2} className="border py-2 p-2">
+    <Stack
+      direction="vertical"
+      gap={2}
+      className="border rounded py-2 p-2">
       <div className="d-flex flex-row justify-content-between">
-        <span>{group.group}</span>
+        <span className="font-weight-bold">{group.group}</span>
         <div className="d-flex justify-content-end">
           <Button onClick={onRemoveItemCart} className="w-30 bg-danger">
             -

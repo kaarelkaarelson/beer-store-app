@@ -7,6 +7,7 @@ const cartAdapter = createEntityAdapter({
 
 const initialState = cartAdapter.getInitialState({
   totalCount: 0,
+  state: 'open',
 });
 
 const useCartSlice = createSlice({

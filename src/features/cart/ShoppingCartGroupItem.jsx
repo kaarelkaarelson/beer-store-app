@@ -16,7 +16,7 @@ const ShoppingCartGroupItem = ({ item }) => {
       direction="horizontal"
       gap={2}
       className="d-flex align-items-center border-top py-2">
-      <div className="me-auto">
+      <div className="me-auto" style={{ fontSize: '14px' }}>
         <div>{item.name}</div>
         <div className="text-muted">{item.brand}</div>
         <div>{item.alcohol}</div>
@@ -38,6 +38,5 @@ const ShoppingCartGroupItem = ({ item }) => {
       </div>
     </Stack>
   );
-};
-
+};3
 export default ShoppingCartGroupItem;

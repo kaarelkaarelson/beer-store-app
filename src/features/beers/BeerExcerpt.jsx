@@ -24,7 +24,7 @@ const BeerExcerpt = ({ beer }) => {
       <Card.Body className="d-flex flex-column children-space-between-1">
         <Card.Title>{beer.name}</Card.Title>
         <Card.Subtitle className="text-muted">{beer.brand}</Card.Subtitle>
-        <ListGroup variant="flush">
+        <ListGroup variant="flush" style={{ fontSize: '14px' }}>
           <ListGroup.Item>{beer.style}</ListGroup.Item>
           <ListGroup.Item>{beer.hop}</ListGroup.Item>
           <ListGroup.Item>{beer.yeast}</ListGroup.Item>
