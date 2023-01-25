@@ -1,9 +1,12 @@
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createEntityAdapter,
+  PayloadAction,
+} from '@reduxjs/toolkit';
+import { CartState, CartItem } from '../../types/types';
 
-const cartAdapter = createEntityAdapter({
-  // @ts-expect-error TS(2571): Object is of type 'unknown'.
-  selectId: (beer) => beer.id,
-  // @ts-expect-error TS(2571): Object is of type 'unknown'.
+const cartAdapter = createEntityAdapter<CartItem>({
+  selectId: (cartItem) => cartItem.id,
   sortComparer: (a, b) => parseFloat(a.alcohol) - parseFloat(b.alcohol),
 });
 
@@ -15,7 +18,7 @@ const useCartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItemCart: (state, action) => {
+    addItemCart: (state, action: PayloadAction<CartItem>) => {
       const itemId = action.payload.id;
       let cartItem = state.entities[itemId];
 
@@ -29,16 +32,24 @@ const useCartSlice = createSlice({
 
       state.totalCount++;
     },
-    removeItemCart: (state, action) => {
+    addItemByIdCart: (state, action: PayloadAction<{ id: number }>) => {
       const itemId = action.payload.id;
       let cartItem = state.entities[itemId];
 
       if (cartItem) {
-        // @ts-expect-error TS(2571): Object is of type 'unknown'.
+        cartItem.quantity += 1;
+
+        state.totalCount++;
+      }
+    },
+    removeItemByIdCart: (state, action: PayloadAction<{ id: number }>) => {
+      const itemId = action.payload.id;
+      let cartItem = state.entities[itemId];
+
+      if (cartItem) {
         const itemQty = cartItem.quantity;
 
         if (itemQty > 1) {
-          // @ts-expect-error TS(2571): Object is of type 'unknown'.
           cartItem.quantity--;
         } else {
           cartAdapter.removeOne(state, itemId);
@@ -47,19 +58,18 @@ const useCartSlice = createSlice({
         state.totalCount--;
       }
     },
-    removeAllItemCart: (state, action) => {
+    removeAllItemCart: (state, action: PayloadAction<{ id: number }>) => {
       const itemId = action.payload.id;
       let cartItem = state.entities[itemId];
 
       if (cartItem) {
-        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         const itemQty = cartItem.quantity;
         cartAdapter.removeOne(state, itemId);
 
         state.totalCount -= itemQty;
       }
     },
-    emtpyCart: (state, action) => {
+    emtpyCart: (state, action: PayloadAction<{}>) => {
       cartAdapter.removeAll(state);
       state.totalCount = 0;
     },
@@ -70,34 +80,33 @@ export const {
   selectAll: selectAllCartItems,
   selectById: selectCartItemById,
   selectIds: selectCartItemIds,
-// @ts-expect-error TS(2571): Object is of type 'unknown'.
-} = cartAdapter.getSelectors((state) => state.cart);
+} = cartAdapter.getSelectors((state: CartState) => state.cart);
 
-export const selectTotalCartQuantity = (state: any) => state.cart.totalCount;
+export const selectTotalCartQuantity = (state: CartState) =>
+  state.cart.totalCount;
 
-export const selectItemCartQuantity = (state: any, itemUid: any) => {
+export const selectItemCartQuantity = (state: CartState, itemUid: string) => {
   const items = state.cart.entities;
 
   // console.log(itemUid, items, state.cart.entities);
   for (let key in items) {
-    if (items[key].uid === itemUid) {
-      return items[key].quantity;
+    if (items[key]!.uid === itemUid) {
+      return items[key]!.quantity;
     }
   }
 };
 
-export const selectCartGroups = (state: any) => {
+export const selectCartGroups = (state: CartState) => {
   const items = state.cart.entities;
-  // @ts-expect-error TS(2550): Property 'values' does not exist on type 'ObjectCo... Remove this comment to see the full error message
   const itemsArr = Object.values(items);
 
   const sortedArr = itemsArr.sort(
-    (a: any, b: any) => parseFloat(a.alcohol) - parseFloat(b.alcohol)
+    (a, b) => parseFloat(a!.alcohol) - parseFloat(b!.alcohol)
   );
 
   console.log('itemsArr', sortedArr);
 
-  if (sortedArr) {
+  if (itemsArr) {
     const groups = sortedArr.reduce((accumulator: any, item: any) => {
       let style = item.style;
 
@@ -117,7 +126,12 @@ export const selectCartGroups = (state: any) => {
   }
 };
 
-export const { addItemCart, removeItemCart, removeAllItemCart, emtpyCart } =
-  useCartSlice.actions;
+export const {
+  addItemCart,
+  addItemByIdCart,
+  removeItemByIdCart,
+  removeAllItemCart,
+  emtpyCart,
+} = useCartSlice.actions;
 
 export default useCartSlice.reducer;

@@ -8,13 +8,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 // @ts-expect-error TS(2580): Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
-  output: {
-    // @ts-expect-error TS(2304): Cannot find name '__dirname'.
-    path: path.join(__dirname, '/dist'),
-    filename: 'bundle.js',
-    publicPath: '/',
-  },
+  entry: './src/index.tsx',
   target: 'web',
   devServer: {
     port: '9500',
@@ -31,12 +25,18 @@ module.exports = {
     topLevelAwait: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.scss'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.scss'],
+  },
+  output: {
+    // @ts-expect-error TS(2304): Cannot find name '__dirname'.
+    path: path.join(__dirname, '/dist'),
+    filename: 'bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -46,8 +46,11 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|jp2|webp)$/,
         loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        },
       },
       {
         test: /\.(scss)$/i,
